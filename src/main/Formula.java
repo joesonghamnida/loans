@@ -23,6 +23,7 @@ public class Formula {
     //discount factor: ([(1+p)^n]-1) / [p(1+p)^n]
 
     //https://docs.oracle.com/javase/8/docs/api/java/util/Currency.html
+    //http://www.javapractices.com/topic/TopicAction.do?Id=13
 
     //TODO: need something to deal with rounding
     /* sample
