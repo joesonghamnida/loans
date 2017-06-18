@@ -22,7 +22,15 @@ public class Formula {
     //(p)eriodic interest rate: annual rate / # payments per year
     //discount factor: ([(1+p)^n]-1) / [p(1+p)^n]
 
+    //https://docs.oracle.com/javase/8/docs/api/java/util/Currency.html
+
     //TODO: need something to deal with rounding
+    /* sample
+    public static double roundToDecimals(double d, int c)
+    {
+        int temp = (int)(d * Math.pow(10 , c));
+        return ((double)temp)/Math.pow(10 , c);
+    }*/
 
     public static double percentToDecimal(double percent){
         double rate = percent / 100;
