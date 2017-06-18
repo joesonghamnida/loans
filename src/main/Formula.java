@@ -1,6 +1,6 @@
 package main;
 
-public class Formulas {
+public class Formula {
 
     //https://www.thebalance.com/loan-payment-calculations-315564
 
