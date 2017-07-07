@@ -29,17 +29,18 @@ public class FormulaTests {
 
         BigDecimal expected = new BigDecimal(0);
 
-        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         expected = expected.valueOf(10500.00);
         expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         Assert.assertTrue(expected.equals(Formula.simpleInterest(BigDecimal.valueOf(10000.0), BigDecimal.valueOf(0.01), 5)));
-        /*
+
         double years = Formula.monthsToYears(32);
-        double rate = Formula.percentToDecimal(23);
-        //TODO: deal with how Java does numbers, re: double. Needs to be done for all non-integers
-        System.out.println(Formula.simpleInterest(12765, rate, years));
-        Assert.assertTrue(20603.99 == Formula.simpleInterest(12765, rate, years));
-        */
+        BigDecimal rate = Formula.percentToDecimal(23);
+        System.out.println(Formula.simpleInterest(BigDecimal.valueOf(12765), rate, years));
+
+        expected = BigDecimal.valueOf(20594.20);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        Assert.assertTrue(expected.equals(Formula.simpleInterest(BigDecimal.valueOf(12765), rate, years)));
+
     }
 
     @Test
