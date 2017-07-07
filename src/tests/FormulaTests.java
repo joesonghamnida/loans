@@ -27,11 +27,13 @@ public class FormulaTests {
     @Test
     public void CalculateSimpleInterest(){
 
-        //Assert.assertTrue();
+        BigDecimal expected = new BigDecimal(0);
 
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        expected = expected.valueOf(10500.00);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        Assert.assertTrue(expected.equals(Formula.simpleInterest(BigDecimal.valueOf(10000.0), BigDecimal.valueOf(0.01), 5)));
         /*
-        Assert.assertTrue(10500 == Formula.simpleInterest(10000, .01, 5));
-        Assert.assertTrue(10500 == Formula.simpleInterest(10000, .01, 5));
         double years = Formula.monthsToYears(32);
         double rate = Formula.percentToDecimal(23);
         //TODO: deal with how Java does numbers, re: double. Needs to be done for all non-integers

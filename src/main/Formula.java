@@ -1,6 +1,7 @@
 package main;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DecimalFormat;
 
 public class Formula {
@@ -46,8 +47,10 @@ public class Formula {
     public static BigDecimal simpleInterest(BigDecimal principal, BigDecimal rate, double years){
         BigDecimal amount;
         BigDecimal interest = (rate.multiply(BigDecimal.valueOf(years)));
-        interest.add(new BigDecimal("1"));
+        BigDecimal one = new BigDecimal("1.0");
+        interest = interest.add(one);
         amount = principal.multiply(interest);
+        amount = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         return amount;
     }
 
