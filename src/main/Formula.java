@@ -33,8 +33,8 @@ public class Formula {
         return ((double)temp)/Math.pow(10 , c);
     }*/
 
-    public static double percentToDecimal(double percent){
-        double rate = percent / 100;
+    public static BigDecimal percentToDecimal(double percent){
+        BigDecimal rate = (BigDecimal.valueOf(percent / 100));
         return rate;
     }
 
@@ -43,10 +43,11 @@ public class Formula {
         return years;
     }
 
-    public static double simpleInterest(double principal, double rate, double years){
-        double amount = 0.0;
-        double interest = (1 + (rate * years));
-        amount = principal * interest;
+    public static BigDecimal simpleInterest(BigDecimal principal, BigDecimal rate, double years){
+        BigDecimal amount;
+        BigDecimal interest = (rate.multiply(BigDecimal.valueOf(years)));
+        interest.add(new BigDecimal("1"));
+        amount = principal.multiply(interest);
         return amount;
     }
 
