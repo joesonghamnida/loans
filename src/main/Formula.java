@@ -8,6 +8,8 @@ public class Formula {
 
     //https://docs.oracle.com/javase/8/docs/api/java/util/Currency.html
     //http://www.javapractices.com/topic/TopicAction.do?Id=13
+	
+	public static BigDecimal one = new BigDecimal("1.0");
 
     public static BigDecimal percentToDecimal(double percent){
         BigDecimal rate = (BigDecimal.valueOf(percent / 100));
@@ -28,7 +30,6 @@ public class Formula {
     public static BigDecimal simpleInterest(BigDecimal principal, BigDecimal rate, double years){
         BigDecimal amount;
         BigDecimal interest = (rate.multiply(BigDecimal.valueOf(years)));
-        BigDecimal one = new BigDecimal("1.0");
         interest = interest.add(one);
         amount = principal.multiply(interest);
         amount = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -46,7 +47,11 @@ public class Formula {
     */
     public static BigDecimal compoundInterest(BigDecimal principal, BigDecimal rate, int compoundingUnits, double years){
     	BigDecimal amount;
-
+    	Double exponent = compoundingUnits * years;
+    	BigDecimal interest = (rate.divide(BigDecimal.valueOf(years)));
+    	interest = interest.add(one);
+    	interest = interest.multiply(BigDecimal.valueOf(exponent));
+    	amount = principal.multiply(interest);
     	amount = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         return amount;
     }
