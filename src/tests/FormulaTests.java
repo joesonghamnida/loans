@@ -45,7 +45,13 @@ public class FormulaTests {
 
     @Test
     public void CalculateCompoundInterest(){
-        //Formula.compoundInterest();
+        BigDecimal expected = new BigDecimal(0);
+        BigDecimal rate = Formula.percentToDecimal(10);
+
+        expected = expected.valueOf(11000.00);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        System.out.println(Formula.compoundInterest(BigDecimal.valueOf(10000.0),rate, 1, 1));
+        Assert.assertTrue(expected.equals(Formula.compoundInterest(BigDecimal.valueOf(10000.0),rate, 1, 1)));
     }
 
     @Test
