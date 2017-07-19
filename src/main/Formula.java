@@ -45,6 +45,8 @@ public class Formula {
     n = number of compounding units per unit
     t = time involved in years
     */
+
+    //am going to need to do different kinds of compound interest
     public static BigDecimal compoundInterest(BigDecimal principal, BigDecimal rate, int compoundingUnits, double years){
     	BigDecimal amount;
     	Double exponent = compoundingUnits * years;
