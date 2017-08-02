@@ -63,9 +63,29 @@ public class Formula {
     //n: payments per year x # of years
     //(p)eriodic interest rate: annual rate / # payments per year
     //discount factor: ([(1+p)^n]-1) / [p(1+p)^n]
-    public static double amortization(){
-        double amount = 0.0;
+    //TODO: look up how bigdecimal handles division
+    public static BigDecimal amortization(BigDecimal payment, BigDecimal principal, BigDecimal rate, int paymentsPerYear, int numberOfYears){
 
-        return amount;
+        int years = paymentsPerYear * numberOfYears;
+        BigDecimal n = BigDecimal.valueOf(years);
+        BigDecimal principalTwo = principal;
+
+        //multiplication first part. Will need to refactor both multiplications and division
+        principal = principal.add(one);
+        principal = principal.multiply(n);
+        principal = principal.subtract(one);
+
+        //multiplication second part
+        BigDecimal principalTwoHolding = principalTwo;
+        principalTwo = principalTwo.add(one);
+        principalTwo = principalTwo.multiply(principalTwoHolding);
+        principalTwo = principalTwoHolding.multiply(n);
+
+        //division
+        BigDecimal discountFactor = principal.divide(principalTwo);
+
+        payment = payment.divide(discountFactor);
+
+        return payment;
     }
 }
