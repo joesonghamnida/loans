@@ -50,12 +50,22 @@ public class FormulaTests {
 
         expected = expected.valueOf(11000.00);
         expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-        System.out.println(Formula.compoundInterest(BigDecimal.valueOf(10000.0),rate, 1, 1));
         Assert.assertTrue(expected.equals(Formula.compoundInterest(BigDecimal.valueOf(10000.0),rate, 1, 1)));
+
+        rate = Formula.percentToDecimal(10);
+        expected = expected.valueOf(9046997.88);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        System.out.println(Formula.compoundInterest(BigDecimal.valueOf(1234567.0),rate, 12, 20));
+        Assert.assertTrue(expected.equals(Formula.compoundInterest(BigDecimal.valueOf(1234567.0),rate, 12, 20)));
     }
 
     @Test
     public void CalculateAmortization(){
-        //Formula.amortization();
+        BigDecimal expected = new BigDecimal(0);
+        BigDecimal rate = Formula.percentToDecimal(10);
+
+        expected = expected.valueOf(100);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        System.out.println((Integer.getInteger(Formula.amortization(BigDecimal.valueOf(100),BigDecimal.valueOf(100), rate, 1, 1).toString())));
     }
 }
