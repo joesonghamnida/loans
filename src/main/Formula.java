@@ -2,7 +2,6 @@ package main;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.text.DecimalFormat;
 
 public class Formula {
 
@@ -70,22 +69,41 @@ public class Formula {
         BigDecimal n = BigDecimal.valueOf(years);
         BigDecimal principalTwo = principal;
 
-        //multiplication first part. Will need to refactor both multiplications and division
+        principal = principalFirstPart(principal, n);
+        principalTwo = principalSecondPart(principalTwo, n);
+
+        payment = principalDivision(principal, principalTwo, payment);
+
+        return payment;
+    }
+
+    //handles multiplication
+    public static BigDecimal principalFirstPart(BigDecimal principal, BigDecimal n){
+
         principal = principal.add(one);
         principal = principal.multiply(n);
         principal = principal.subtract(one);
 
-        //multiplication second part
+        return principal;
+    }
+
+    //multiplication second part
+    public static BigDecimal principalSecondPart(BigDecimal principalTwo, BigDecimal n){
+
         BigDecimal principalTwoHolding = principalTwo;
         principalTwo = principalTwo.add(one);
         principalTwo = principalTwo.multiply(principalTwoHolding);
         principalTwo = principalTwoHolding.multiply(n);
 
-        //division
+        return principalTwo;
+    }
+
+    //amortization division
+    public static BigDecimal principalDivision(BigDecimal principal, BigDecimal principalTwo, BigDecimal payment){
         BigDecimal discountFactor = principal.divide(principalTwo);
 
-        payment = payment.divide(discountFactor);
-
+        payment = payment.divide(discountFactor, MathContext.DECIMAL64);
+        payment = payment.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         return payment;
     }
 }
