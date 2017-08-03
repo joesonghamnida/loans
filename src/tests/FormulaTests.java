@@ -66,7 +66,13 @@ public class FormulaTests {
 
         expected = expected.valueOf(100);
         expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-        //System.out.println(((Formula.amortization(BigDecimal.valueOf(100),BigDecimal.valueOf(100), rate, 1, 1).toString())));
-        Assert.assertTrue(expected.equals(Formula.amortization(BigDecimal.valueOf(100),BigDecimal.valueOf(100), rate, 1, 1)));
+        System.out.println(((Formula.amortization(BigDecimal.valueOf(100), rate, 1, 1).toString())));
+        Assert.assertTrue(expected.equals(Formula.amortization(BigDecimal.valueOf(100), rate, 1, 1)));
+
+        expected = expected.valueOf(400.76);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        rate = BigDecimal.valueOf(.00625);
+        System.out.println(Formula.amortization(BigDecimal.valueOf(20000), rate, 12, 5));
+        Assert.assertTrue(expected.equals(Formula.amortization(BigDecimal.valueOf(20000), rate, 12, 5)));
     }
 }
