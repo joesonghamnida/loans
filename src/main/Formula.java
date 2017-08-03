@@ -62,8 +62,8 @@ public class Formula {
     //n: payments per year x # of years
     //(p)eriodic interest rate: annual rate / # payments per year
     //discount factor: ([(1+p)^n]-1) / [p(1+p)^n]
-    //TODO: look up how bigdecimal handles division
-    public static BigDecimal amortization(BigDecimal payment, BigDecimal principal, BigDecimal rate, int paymentsPerYear, int numberOfYears){
+    //TODO: issue with payment and will have to figure out how to have initial value and decreasing value for mult loans
+    public static BigDecimal amortization(BigDecimal principal, BigDecimal rate, int paymentsPerYear, int numberOfYears){
 
         int years = paymentsPerYear * numberOfYears;
         BigDecimal n = BigDecimal.valueOf(years);
@@ -72,7 +72,7 @@ public class Formula {
         principal = principalFirstPart(principal, n);
         principalTwo = principalSecondPart(principalTwo, n);
 
-        payment = principalDivision(principal, principalTwo, payment);
+        BigDecimal payment = principalDivision(principal, principalTwo);
 
         return payment;
     }
@@ -99,9 +99,11 @@ public class Formula {
     }
 
     //amortization division
-    public static BigDecimal principalDivision(BigDecimal principal, BigDecimal principalTwo, BigDecimal payment){
+    //TODO: bug in payment with 0 payment
+    public static BigDecimal principalDivision(BigDecimal principal, BigDecimal principalTwo){
         BigDecimal discountFactor = principal.divide(principalTwo);
 
+        BigDecimal payment = BigDecimal.valueOf(0);
         payment = payment.divide(discountFactor, MathContext.DECIMAL64);
         payment = payment.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         return payment;
