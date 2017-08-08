@@ -63,7 +63,16 @@ public class Formula {
     //(p)eriodic interest rate: annual rate / # payments per year
     //discount factor: ([(1+p)^n]-1) / [p(1+p)^n]
     //TODO: issue with payment and will have to figure out how to have initial value and decreasing value for mult loans
-    public static BigDecimal amortization(BigDecimal principal, BigDecimal rate, int paymentsPerYear, int numberOfYears){
+
+    public static BigDecimal calculateInitialPayment(BigDecimal principal, int paymentsPerYear, int numberOfYears){
+        BigDecimal initialPayment;
+
+        initialPayment = principal.divide(BigDecimal.valueOf(paymentsPerYear * numberOfYears));
+
+        return initialPayment;
+    }
+
+    public static BigDecimal amortization(BigDecimal initialPayment, BigDecimal principal, BigDecimal rate, int paymentsPerYear, int numberOfYears){
 
         int years = paymentsPerYear * numberOfYears;
         BigDecimal n = BigDecimal.valueOf(years);
