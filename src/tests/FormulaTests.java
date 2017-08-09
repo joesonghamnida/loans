@@ -62,7 +62,16 @@ public class FormulaTests {
     @Test
     public void CalculateAmortizationInitialPayment(){
         BigDecimal expected = BigDecimal.valueOf(100);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         Assert.assertTrue(expected.equals(Formula.calculateInitialPayment(BigDecimal.valueOf(100), 1 ,1)));
+
+        expected = BigDecimal.valueOf(333.33);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        Assert.assertTrue(expected.equals(Formula.calculateInitialPayment(BigDecimal.valueOf(20000), 12, 5)));
+
+        expected = BigDecimal.valueOf(1494.15);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        Assert.assertTrue(expected.equals(Formula.calculateInitialPayment(BigDecimal.valueOf(53789.24), 6,6)));
     }
 
     @Test
@@ -78,7 +87,7 @@ public class FormulaTests {
         expected = expected.valueOf(400.76);
         expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
         rate = BigDecimal.valueOf(.00625);
-        System.out.println(Formula.amortization(BigDecimal.valueOf(400), BigDecimal.valueOf(20000), rate, 12, 5));
+        System.out.println(Formula.amortization(BigDecimal.valueOf(400.76), BigDecimal.valueOf(20000), rate, 12, 5));
         //Assert.assertTrue(expected.equals(Formula.amortization(BigDecimal.valueOf(20000), rate, 12, 5)));
     }
 }
