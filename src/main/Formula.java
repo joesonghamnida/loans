@@ -67,7 +67,10 @@ public class Formula {
     public static BigDecimal calculateInitialPayment(BigDecimal principal, int paymentsPerYear, int numberOfYears){
         BigDecimal initialPayment;
 
-        initialPayment = principal.divide(BigDecimal.valueOf(paymentsPerYear * numberOfYears));
+        double princ = principal.doubleValue();
+        princ = princ / (paymentsPerYear * numberOfYears);
+        initialPayment = BigDecimal.valueOf(princ);
+        initialPayment = initialPayment.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
         return initialPayment;
     }
