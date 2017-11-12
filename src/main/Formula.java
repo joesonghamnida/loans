@@ -7,6 +7,11 @@ public class Formula {
 
     //https://docs.oracle.com/javase/8/docs/api/java/util/Currency.html
     //http://www.javapractices.com/topic/TopicAction.do?Id=13
+
+    //use these to deal with payments for amortization
+    protected static BigDecimal initPayment;
+    protected static BigDecimal oldPayment;
+    protected static BigDecimal newPayment;
 	
 	public static BigDecimal one = new BigDecimal("1.0");
 
